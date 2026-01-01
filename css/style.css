@@ -1,0 +1,428 @@
+/* =========================================
+   1. SETUP & VARIABLES
+   ========================================= */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap");
+
+:root {
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+
+  --color-bg: #fcfcfc; /* Ultra-light grey/white for softness */
+  --color-text: #1a1a1a; /* Soft black */
+  --color-accent: #d4a373; /* Optional muted gold/beige for highlights */
+  --color-border: #e5e5e5;
+
+  --transition-slow: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-fast: 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-fast);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =========================================
+   2. HEADER & NAVIGATION
+   ========================================= */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  mix-blend-mode: difference; /* Ensures visibility on light/dark backgrounds */
+  color: white; /* Works with mix-blend-mode */
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Hamburger Menu Button (3 Lines -> X) */
+.menu-toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 30px;
+  position: relative;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.menu-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  transition: all 0.4s ease;
+  transform-origin: center;
+}
+
+/* Full Screen Overlay - Restored */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #111; /* Dark background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-slow);
+  z-index: 999;
+}
+
+.nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ensure we have 3 lines in HTML or adjust height for 3 */
+/* If using 2 lines in HTML, we need to inject a 3rd or use pseudo elements. 
+   Let's assume we update HTML to have 3 spans or use pseudo elements.
+   Best approach without changing HTML structure if we only have 2 spans: 
+   Use ::before and ::after on the button or spans. 
+   BUT plan says fix to 3 lines. I will update HTML to 3 lines.
+*/
+
+/* Menu State Transformations for 3 lines */
+/* Better X animation logic */
+.nav-overlay.active ~ .header .menu-toggle-button .menu-bar:nth-child(1) {
+  transform: translateY(14px) rotate(45deg);
+  transform-origin: center;
+}
+.nav-overlay.active ~ .header .menu-toggle-button .menu-bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-overlay.active ~ .header .menu-toggle-button .menu-bar:nth-child(3) {
+  transform: translateY(-14px) rotate(-45deg);
+  transform-origin: center;
+}
+
+.nav-links {
+  list-style: none;
+  text-align: center;
+}
+
+.nav-link {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: #fff;
+  display: block;
+  margin: 1.5rem 0;
+  opacity: 0;
+  transform: translateY(40px); /* Slightly more movement */
+  filter: blur(10px); /* Start blurred */
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); /* Custom 'easeOutExpo' feel */
+  letter-spacing: 0; /* meaningful starting point */
+}
+
+.nav-link:hover {
+  /* font-style: italic; - Removed to stop snapping */
+  color: var(--color-accent);
+  letter-spacing: 0.1em; /* Smooth expansion */
+  transform: translateY(40px) scale(1.05); /* Slight scale up */
+}
+
+/* Stagger animation for links */
+.nav-overlay.active .nav-link {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+.nav-overlay.active .nav-link:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.nav-overlay.active .nav-link:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.nav-overlay.active .nav-link:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.nav-overlay.active .nav-link:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+/* =========================================
+   3. HERO SECTION (Index)
+   ========================================= */
+.hero {
+  height: 100vh;
+  width: 100%;
+  background-color: #e0e0e0; /* Placeholder grey */
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 10;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+
+.hero-title {
+  font-size: 5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeInUp 1.2s forwards 0.5s;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0;
+  animation: fadeInUp 1.2s forwards 0.8s;
+}
+
+/* =========================================
+   4. CONTENT SECTIONS (About, General)
+   ========================================= */
+.page-wrapper {
+  padding-top: 0; /* No padding needed for full screen hero */
+}
+
+section {
+  padding: 6rem 10%;
+}
+
+.split-section {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  min-height: 80vh;
+}
+
+.split-text {
+  flex: 1;
+}
+
+.split-image {
+  flex: 1;
+  height: 60vh;
+  overflow: hidden;
+}
+
+.split-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s ease;
+}
+
+.split-image:hover img {
+  transform: scale(1.05);
+}
+
+.btn-link {
+  display: inline-block;
+  margin-top: 2rem;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 5px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* =========================================
+   5. GALLERY (Marquee/Scroll)
+   ========================================= */
+.gallery-container {
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.marquee {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  padding: 2rem 0;
+}
+
+.track {
+  display: flex;
+  gap: 2rem;
+  animation: marquee 20s linear infinite;
+  will-change: transform;
+}
+
+/* Reverse scroll for alternate rows */
+.marquee.reverse .track {
+  animation-direction: reverse;
+}
+
+.gallery-item {
+  width: 300px; /* Fixed width for consistent flow */
+  height: 400px;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* transition: filter 0.5s; - Removed Grayscale */
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  } /* Assumes track is duplicated */
+}
+
+/* =========================================
+   6. INQUIRIES FORM
+   ========================================= */
+.inquiries-page {
+  padding: 8rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-form {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-bottom-color: #000;
+}
+
+.submit-btn {
+  margin-top: 2rem;
+  padding: 1rem 3rem;
+  background: #000;
+  color: #fff;
+  border: none;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background: #333;
+}
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .header {
+    padding: 1.5rem;
+  }
+  .hero-title {
+    font-size: 3rem;
+  }
+  .split-section {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .split-image {
+    width: 100%;
+    height: 400px;
+  }
+}

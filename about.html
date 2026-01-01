@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Eleven 12</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        /* Specific styles for the Revamped About Page to make it "Editorial" */
+        .editorial-hero {
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .editorial-title {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            font-family: var(--font-heading);
+        }
+
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            align-items: center;
+        }
+
+        .editorial-img {
+            grid-column: span 6;
+            height: 600px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .editorial-text {
+            grid-column: span 5;
+            padding: 2rem;
+        }
+
+        .editorial-text.offset {
+            grid-column-start: 8;
+        }
+
+        .quote-section {
+            background: #111;
+            color: #fff;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .quote-text {
+            font-size: 2.5rem;
+            font-family: var(--font-heading);
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media(max-width: 900px) {
+            .editorial-grid {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .editorial-img,
+            .editorial-text {
+                width: 100%;
+                grid-column: span 12;
+            }
+
+            .editorial-text.offset {
+                grid-column: span 12;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-overlay" id="nav-overlay">
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+            <li><a href="inquiries.html" class="nav-link">Inquiries</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+    </div>
+
+    <header class="header" style="mix-blend-mode: difference; color: #fff;">
+        <div class="logo">Eleven 12</div>
+        <button class="menu-toggle-button" id="menu-toggle" aria-label="Toggle Menu">
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+        </button>
+    </header>
+
+    <main>
+        <section class="editorial-hero">
+            <h1 class="editorial-title">The Art of Elegance</h1>
+            <p style="max-width: 600px; margin: 0 auto; font-size: 1.1rem;">Redefining modern luxury through timeless
+                design and unwavering confidence.</p>
+        </section>
+
+        <section class="editorial-grid">
+            <img src="./img/Model image.png" alt="Vision" class="editorial-img">
+            <div class="editorial-text offset">
+                <h3>Our Philosophy</h3>
+                <p>Eleven 12 Clothing isn't just a brand; it's a movement towards self-expression. We believe that
+                    fashion is the ultimate form of non-verbal communication, speaking volumes before a word is uttered.
+                </p>
+            </div>
+        </section>
+
+        <section class="quote-section">
+            <p class="quote-text">"Style is a way to say who you are without having to speak."</p>
+        </section>
+
+        <section class="editorial-grid">
+            <div class="editorial-text" style="grid-column: 2 / span 5;">
+                <h3>The Collection</h3>
+                <p>Each piece is meticulously crafted to blend contemporary trends with classic silhouettes. From the
+                    stitch to the silhouette, we ensure every detail serves a purpose: to make you feel empowered.</p>
+            </div>
+            <img src="./img/customer 3.png" alt="Craftsmanship" class="editorial-img" style="grid-column: 8 / span 5;">
+        </section>
+    </main>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
