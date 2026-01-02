@@ -310,13 +310,14 @@ section {
 .track {
   display: flex;
   gap: 2rem;
-  animation: marquee 20s linear infinite;
+  /* Switched to ease-in-out and alternate for natural "slow down before stop" feel */
+  animation: marquee 40s ease-in-out infinite alternate;
   will-change: transform;
 }
 
-/* Reverse scroll for alternate rows */
+/* Reverse scroll for alternate rows - starts from other side visually or just phases differently */
 .marquee.reverse .track {
-  animation-direction: reverse;
+  animation-direction: alternate-reverse;
 }
 
 .gallery-item {
@@ -339,8 +340,10 @@ section {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
-  } /* Assumes track is duplicated */
+    transform: translateX(
+      -20%
+    ); /* Less distance for the sway to ensure no empty space */
+  }
 }
 
 /* =========================================

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inquiries - Eleven 12</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./img/logo.jpg">
 </head>
 
 <body>
@@ -30,22 +31,31 @@
         <h1 class="hero-title" style="color: #000; mix-blend-mode: normal; font-size: 3rem;">Custom Inquiries</h1>
         <p>For bespoke pieces and private consultations, please reach out.</p>
 
-        <form class="contact-form">
+        <!-- ACTION REQUIRED: Replace 'YOUR_FORM_ID' with your actual Formspree ID -->
+        <form class="contact-form" action="https://formspree.io/f/xlgdjnqn" method="POST">
             <div class="form-group">
-                <input type="text" placeholder="Name" required>
+                <input type="text" name="name" placeholder="Name" required>
             </div>
             <div class="form-group">
-                <input type="email" placeholder="Email" required>
+                <input type="email" name="email" placeholder="Email" required>
             </div>
             <div class="form-group">
-                <textarea rows="5" placeholder="Message" required></textarea>
+                <textarea name="message" rows="5" placeholder="Message" required></textarea>
             </div>
-            <button type="submit" class="submit-btn">Send Inquiry</button>
+            <button type="submit" class="submit-btn" style="width: 100%;">Send Inquiry</button>
         </form>
+
+        <div class="contact-info" style="margin-top: 4rem; text-align: center; opacity: 0.8;">
+            <p style="margin-bottom: 0.5rem;">Direct Line</p>
+            <p style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 2rem;">+234 81 000 0000</p>
+
+            <a href="https://www.instagram.com/eleven12clothing/" target="_blank"
+                style="font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; border-bottom: 1px solid #000; padding-bottom: 4px;">Follow
+                on Instagram</a>
+        </div>
     </main>
 
     <script src="./script.js"></script>
 </body>
 
 </html>
-
